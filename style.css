@@ -12,16 +12,23 @@
 
 body {
   margin: 0;
+  padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
+  display: flex;
+  justify-content: center;
 }
+
 
 .container {
   max-width: 900px;
-  margin: 0 auto;
+  width: 100%;         
   padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
 }
 
 nav {
@@ -135,18 +142,22 @@ footer a:hover {
 }
 
 
-h1, .subtitle, .about p, .featured-projects, .latest-notes {
+h1, .subtitle, .featured-projects, .latest-notes {
   text-align: center;
 }
 
 .featured-projects ul, .latest-notes ul {
-  display: inline-block; /* keep bullets nicely aligned */
-  text-align: left;      /* bullets stay left-aligned inside centered block */
+  display: inline-block; 
+  text-align: left;      
+  max-width: 700px; /* keeps bullets readable */
 }
 
-.featured-projects ul, .latest-notes ul {
+.about p {
+  text-align: left;
   max-width: 700px;
 }
+
+
 
 .about, .featured-projects, .latest-notes {
   margin-top: 48px;
