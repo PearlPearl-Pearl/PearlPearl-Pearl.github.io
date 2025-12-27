@@ -1,4 +1,4 @@
-:root {
+ :root {
   --bg: #ffffff;
   --text: #1f2937;
   --muted: #6b7280;
@@ -18,13 +18,12 @@ body {
   color: var(--text);
   line-height: 1.7;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
 }
-
 
 .container {
   max-width: 900px;
-  width: 100%;         
+  width: 100%;
   padding: 48px 24px;
   display: flex;
   flex-direction: column;
@@ -53,32 +52,12 @@ h1, h2 {
 
 h1 {
   font-size: 2.2rem;
+  text-align: center;
 }
 
-ul {
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 12px;
-}
-
-footer {
-  margin-top: 80px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-footer a:hover {
-  text-decoration: underline;
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .profile-img {
@@ -90,34 +69,37 @@ footer a:hover {
   border: 1px solid var(--border);
 }
 
-.profile-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
 .about {
   margin-top: 32px;
+  text-align: center;
+  max-width: 700px;
 }
 
 .about h2 {
-  color: var(--text);
-  margin-bottom: 12px;
   font-size: 1.5rem;
+  margin-bottom: 12px;
 }
 
 .about p {
   color: var(--muted);
   line-height: 1.7;
-  max-width: 65ch;
 }
 
+.home-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap; 
+  width: 100%;
+  margin-top: 48px;
+}
 
 .featured-projects, .latest-notes {
-  margin-top: 40px;
+  flex: 1 1 400px; 
+  text-align: left;
 }
 
 .featured-projects h2, .latest-notes h2 {
-  color: var(--text);
   font-size: 1.5rem;
   margin-bottom: 12px;
 }
@@ -125,6 +107,7 @@ footer a:hover {
 .featured-projects ul, .latest-notes ul {
   list-style-type: disc;
   padding-left: 20px;
+  max-width: 100%;
 }
 
 .featured-projects li, .latest-notes li {
@@ -141,26 +124,34 @@ footer a:hover {
   text-decoration: underline;
 }
 
-
-h1, .subtitle, .featured-projects, .latest-notes {
+/* Footer */
+footer {
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
   text-align: center;
 }
 
-.featured-projects ul, .latest-notes ul {
-  display: inline-block; 
-  text-align: left;      
-  max-width: 700px; /* keeps bullets readable */
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.about p {
-  text-align: center;
-  max-width: 700px;
+footer a:hover {
+  text-decoration: underline;
 }
 
+@media (max-width: 850px) {
+  .home-columns {
+    flex-direction: column;
+    gap: 32px;
+  }
 
-
-.about, .featured-projects, .latest-notes {
-  margin-top: 48px;
-  margin-bottom: 48px;
+  .featured-projects, .latest-notes {
+    flex: 1 1 100%;
+  }
 }
 
