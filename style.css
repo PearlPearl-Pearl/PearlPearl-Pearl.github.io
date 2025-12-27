@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-  max-width: 820px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 48px 24px;
 }
@@ -132,5 +132,24 @@ footer a:hover {
 
 .featured-projects a:hover, .latest-notes a:hover {
   text-decoration: underline;
+}
+
+
+h1, .subtitle, .about p, .featured-projects, .latest-notes {
+  text-align: center;
+}
+
+.featured-projects ul, .latest-notes ul {
+  display: inline-block; /* keep bullets nicely aligned */
+  text-align: left;      /* bullets stay left-aligned inside centered block */
+}
+
+.featured-projects ul, .latest-notes ul {
+  max-width: 700px;
+}
+
+.about, .featured-projects, .latest-notes {
+  margin-top: 48px;
+  margin-bottom: 48px;
 }
 
