@@ -153,7 +153,7 @@ h1, .subtitle, .featured-projects, .latest-notes {
 }
 
 .about p {
-  text-align: left;
+  text-align: center;
   max-width: 700px;
 }
 
