@@ -1,51 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research & Projects</title>
   <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
-  <div class="container">
+<div class="container">
 
 <nav>
   <a href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
-  <a href="notes.html">Notes</a>
+  <a href="projects.html" class="active">Research</a>
+  <!-- <a href="notes.html">Notes</a> -->
+  <a href="assets/CV_Pearl_Kuuridong.pdf" download class="btn">Download CV</a>
 </nav>
 
-<h1>Projects</h1>
-
-<ul>
-  <li>
-    <strong>kNN from Scratch (WIP)</strong><br />
-    Implementing k-Nearest Neighbors to understand distance metrics and decision boundaries.
-  </li>
-  <li>
-    <strong>Simple Linear Regression Simulator (WIP)</strong><br />
-    Exploring bias–variance and noise through simulation.
-  </li>
-  <li>
-    <strong>Data Engineering Pipeline (Paused)</strong><br />
-    Designing data ingestion and transformation pipelines.
-  </li>
-</ul>
-<footer>
-  <p>
-    © 2025 · Learning in public · Work in progress
+<header class="intro">
+  <h1>Research & Projects</h1>
+  <p class="lead">
+    Selected research work and projects demonstrating both theoretical understanding and practical implementation.
   </p>
-  <p>
-    Contact:
-    <a href="mailto:pksandoh@gmail.com">Email</a> ·
-    <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a> ·
-    <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a> ·
-    <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
+</header>
+
+<section class="research-grid">
+  <div class="research-card">
+    <h2>Simple Linear Regression Simulator</h2>
+    <p class="meta">Ongoing</p>
+    <p>
+      Simulation-based exploration of bias–variance tradeoffs and noise effects in linear models.
+      Focus on statistical assumptions and interpretability.
     </p>
+    <p><a href="#" target="_blank">Code (GitHub)</a></p>
+  </div>
+
+  <div class="research-card">
+    <h2>End-to-End Data Engineering Pipeline</h2>
+    <p class="meta">Paused</p>
+    <p>
+      Designing data ingestion, transformation, and analysis pipelines under real-world scalability and reliability constraints.
+    </p>
+    <p><a href="#" target="_blank">Code (GitHub)</a></p>
+  </div>
+
+  <div class="research-card">
+    <h2>k-Nearest Neighbors Implementation (WIP)</h2>
+    <p class="meta">Work in progress</p>
+    <p>
+      Implementing k-NN from scratch to understand distance metrics, decision boundaries, and performance trade-offs.
+    </p>
+    <p><a href="#" target="_blank">Code (GitHub)</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 · Academic homepage</p>
 </footer>
 
-
-  </div>
+</div>
 </body>
 </html>
