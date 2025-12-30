@@ -70,7 +70,7 @@ nav a.active {
 /* MAIN GRID */
 .main-grid {
   display: flex;
-  gap: 160; /* space between left and right columns */
+  gap: 120px; /* space between left and right columns */
   width: 100%;
   margin-bottom: 48px;
 }
