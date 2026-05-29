@@ -3,78 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research & Projects</title>
+  <title>Research &amp; Projects — Pearl Kuuridong</title>
+  <meta name="description" content="Research and projects by Pearl Kuuridong — graph neural networks, combinatorial optimization, and data engineering.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
-
 <body>
-<div class="container">
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="projects.html" class="active">Research</a>
-  <!-- <a href="notes.html">Notes</a> -->
-  <a href="assets/Pearl_Kuuridong_CV.pdf" download class="btn">Download CV</a>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-brand">Pearl Kuuridong</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html" class="active">Research</a>
+      <a href="index.html#notes">Notes</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="assets/Pearl_Kuuridong_CV.pdf" download class="cv-btn">
+        <i class="ti ti-download"></i> CV
+      </a>
+    </div>
+  </nav>
 
-<header class="intro">
-  <h1>Research & Projects</h1>
-  <p class="lead">
-    Selected research work and projects demonstrating both theoretical understanding and practical implementation.
-  </p>
-</header>
+  <main class="page">
 
-<section class="research-grid">
-  <div class="research-card">
-  <h2>Combinatorial Optimization with Multi-Filter Graph Neural Networks</h2>
-  <p class="meta">Master's Thesis · AIMS Rwanda · 2025</p>
-  <p>
-    Reproducing and extending Wenkel et al.'s GCON architecture for graph combinatorial 
-    optimization problems including Maximum Cut, Maximum Clique, and Minimum Dominating Set. 
-    Explores the role of hybrid filter banks and localized attention mechanisms in 
-    unsupervised learning settings.
-  </p>
-  <p class="meta">Supervised by Dr. Olakunle S. Abawonse · Co-supervised by Dr. D. Woukeng Feudjio</p>
-</div>
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <p class="hero-eyebrow">Work</p>
+      <h1 style="font-family:'Lora',serif; font-size:32px; font-weight:500; color:var(--navy); line-height:1.2;">
+        Research &amp; Projects
+      </h1>
+      <p class="lead">
+        Selected research and projects spanning graph neural networks, combinatorial
+        optimization, statistical modelling, and data engineering.
+      </p>
+    </div>
 
-  <div class="research-card">
-    <h2>Generalized Linear Models</h2>
-    <p class="meta">Ongoing</p>
-    <p>
-      Simulation-based exploration of bias–variance tradeoffs and noise effects in linear models.
-      Focus on statistical assumptions and interpretability.
-    </p>
-    <p><a href="https://github.com/PearlPearl-Pearl/AIMS/blob/master/Review%20Phase/SML/learning_machines/SLR.ipynb" target="_blank">Code (GitHub)</a></p>
-  </div>
+    <!-- RESEARCH -->
+    <section>
+      <div class="sec-label">Research</div>
 
-  <div class="research-card">
-    <h2>End-to-End Data Engineering Pipeline</h2>
-    <p class="meta">Paused</p>
-    <p>
-      Designing data ingestion, transformation, and analysis pipelines under real-world scalability and reliability constraints.
-    </p>
-    <p><a href="https://github.com/PearlPearl-Pearl/weather-insights.git" target="_blank">Code (GitHub)</a></p>
-  </div>
+      <div class="research-card">
+        <h3>Combinatorial Optimization with Graph Neural Networks</h3>
+        <p>
+          Reproduces and extends the GCON framework (Wenkel et al., 2024) — an unsupervised GNN
+          that equips each node with richer feature representations through a filter bank of
+          aggregation and comparison filters. Extends to Maximum Independent Set and Balanced
+          Graph Partitioning by deriving self-supervised loss functions and rule-based decoders
+          for each. GCON outperforms ScatteringClique on Graph Partitioning and remains
+          competitive on Maximum Independent Set.
+        </p>
+        <div class="tags">
+          <span class="tag tag-teal">Graph Neural Networks</span>
+          <span class="tag tag-navy">Combinatorial Optimization</span>
+          <span class="tag tag-gray">Unsupervised Learning</span>
+          <span class="tag tag-gray">Filter Banks</span>
+          <span class="tag tag-gray">Graph Theory</span>
+        </div>
+        <p class="research-meta">
+          MSc Thesis &middot; AIMS Rwanda &middot; June 2026 &middot;
+          Supervised by Dr. Olakunle S. Abawonse &amp; Dr. Donald Woukeng Feudjio
+        </p>
+      </div>
+    </section>
 
-  <!-- <div class="research-card">
-    <h2>k-Nearest Neighbors Implementation (WIP)</h2>
-    <p class="meta">Work in progress</p>
-    <p>
-      Implementing k-NN from scratch to understand distance metrics, decision boundaries, and performance trade-offs.
-    </p>
-    <p><a href="#" target="_blank">Code (GitHub)</a></p>
-  </div> -->
-</section>
+    <!-- PROJECTS -->
+    <section>
+      <div class="sec-label">Projects</div>
 
-<footer>
-    <p>© 2025 · Pearl Kuuridong</p>
-    <p>
-      <a href="mailto:pksandoh@gmail.com">Email</a> ·
-      <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a> ·
-      <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a> ·
-      <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
-    </p>
-  </footer>
-</div>
+      <div class="research-card">
+        <h3>Generalized Linear Models — Bias–Variance Simulation</h3>
+        <p>
+          Simulation-based exploration of bias–variance tradeoffs and noise effects in linear
+          models. Focus on statistical assumptions, model interpretability, and the behaviour
+          of estimators under different noise regimes.
+        </p>
+        <div class="tags">
+          <span class="tag tag-gray">Statistical ML</span>
+          <span class="tag tag-gray">Python</span>
+        </div>
+        <p class="research-meta" style="margin-bottom:0.6rem;">Ongoing</p>
+        <a href="https://github.com/PearlPearl-Pearl/AIMS/blob/master/Review%20Phase/SML/learning_machines/SLR.ipynb"
+           target="_blank" class="card-link">
+          <i class="ti ti-brand-github"></i> View on GitHub
+        </a>
+      </div>
+
+      <div class="research-card">
+        <h3>End-to-End Data Engineering Pipeline</h3>
+        <p>
+          Designing and implementing data ingestion, transformation, and analysis pipelines
+          under real-world scalability and reliability constraints. Covers pipeline architecture,
+          orchestration, and data quality validation.
+        </p>
+        <div class="tags">
+          <span class="tag tag-gray">Data Engineering</span>
+          <span class="tag tag-gray">Python</span>
+          <span class="tag tag-gray">Pipelines</span>
+        </div>
+        <p class="research-meta" style="margin-bottom:0.6rem;">Paused</p>
+        <a href="https://github.com/PearlPearl-Pearl/weather-insights.git"
+           target="_blank" class="card-link">
+          <i class="ti ti-brand-github"></i> View on GitHub
+        </a>
+      </div>
+    </section>
+
+    <!-- INTERESTS -->
+    <section>
+      <div class="sec-label">Research Interests</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <span class="tag tag-navy">Graph Neural Networks</span>
+        <span class="tag tag-navy">Topological Data Analysis</span>
+        <span class="tag tag-navy">Combinatorial Optimization</span>
+        <span class="tag tag-teal">Graph Signal Processing</span>
+        <span class="tag tag-teal">Unsupervised Learning</span>
+        <span class="tag tag-teal">Geometric Deep Learning</span>
+        <span class="tag tag-gray">Scalable Data Engineering</span>
+        <span class="tag tag-gray">Statistical Machine Learning</span>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>&copy; 2026 Pearl Kuuridong</span>
+      <div class="footer-links">
+        <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a>
+        <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
+        <a href="mailto:pksandoh@gmail.com">Email</a>
+      </div>
+    </footer>
+
+  </main>
 </body>
 </html>

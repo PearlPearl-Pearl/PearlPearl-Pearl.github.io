@@ -3,109 +3,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pearl Kuuridong</title>
+  <title>Pearl Kuuridong — Mathematician & ML Researcher</title>
+  <meta name="description" content="Pearl Kuuridong — mathematician and machine learning researcher working on graph neural networks and combinatorial optimization.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
-
 <body>
-<div class="container">
 
-  <!-- NAVIGATION -->
+  <!-- NAV -->
   <nav>
-    <a href="index.html" class="active">Home</a>
-    <a href="projects.html">Research</a>
-    <a href="assets/Pearl_Kuuridong_CV.pdf" download class="btn">Download CV</a>
+    <a href="index.html" class="nav-brand">Pearl Kuuridong</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="projects.html">Research</a>
+      <a href="index.html#notes">Notes</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="assets/Pearl_Kuuridong_CV.pdf" download class="cv-btn">
+        <i class="ti ti-download"></i> CV
+      </a>
+    </div>
   </nav>
 
-  <header class="intro" style="margin-bottom: 16px;">
-    <h1 style="margin-bottom: 0;">Pearl Kuuridong</h1>
-  </header>
+  <main class="page">
 
-  <!-- MAIN CONTENT GRID -->
-  <div class="main-grid">
-
-    <!-- LEFT COLUMN: About & Background -->
-    <div class="left-column">
-      <section class="about">
-        <h2>About Me</h2>
-        <div class="about-text">
-          <p>
-            I am a mathematician and machine learning researcher interested in the geometry 
-            and structure of data. My current work focuses on graph neural networks for 
-            combinatorial optimization — specifically, how hybrid filter banks and localized 
-            attention mechanisms can help solve NP-hard problems on graphs in an unsupervised 
-            setting.
-          </p>
-          <p>
-            I am drawn to research that starts with a deep theoretical question and follows 
-            it through to practical impact. My background spans topological data analysis, 
-            graph signal processing, and scalable data engineering — and I am actively 
-            pursuing doctoral study to go further.
-          </p>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Mathematician &amp; ML Researcher</p>
+        <h1>Pearl<br>Kuuridong</h1>
+        <p class="hero-bio">
+          I work at the intersection of graph theory, topological data analysis, and
+          machine learning — with a focus on how geometry and structure can help solve
+          hard combinatorial problems.
+        </p>
+        <p class="hero-bio">
+          Currently finishing my MSc in Mathematical Sciences at AIMS Rwanda, where my
+          thesis studies unsupervised GNN frameworks for combinatorial optimization.
+          Previously a data engineer; actively pursuing doctoral study.
+        </p>
+        <div class="hero-socials">
+          <a href="mailto:pksandoh@gmail.com">
+            <i class="ti ti-mail"></i> pksandoh@gmail.com
+          </a>
+          <a href="https://github.com/PearlPearl-Pearl" target="_blank">
+            <i class="ti ti-brand-github"></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">
+            <i class="ti ti-brand-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://medium.com/@pearlsandoh" target="_blank">
+            <i class="ti ti-brand-medium"></i> Medium
+          </a>
         </div>
-      </section>
-
-      <section class="about">
-        <h2>Background</h2>
-        <div class="about-text">
-          <p>
-            MSc in Mathematical Sciences (Data Science track), AIMS Rwanda. 
-            BSc in Mathematics & Computer Science, University of Ghana.
-          </p>
-          <p>
-            Previously worked as a data engineer, designing and maintaining scalable data 
-            pipelines and workflows. This experience strengthened my computational and 
-            problem-solving skills.
-          </p>
-        </div>
-      </section>
-    </div>
-
-    <!-- RIGHT COLUMN: Image & Notes -->
-    <div class="right-column">
-      <div class="profile-wrapper">
-        <img src="assets/profile.jpg" alt="Portrait photo" class="profile-img">
-
-        <div class="notes-links">
-          <h3>Recent Notes & Reflections</h3>
-          <ul>
-            <li><a href="https://medium.com/@pearlsandoh/getting-started-with-git-and-github-9fcfcd9803e7">An Introduction to Git</a></li>
-          </ul>
-        </div>
+      </div>
+      <div class="hero-right">
+        <img src="assets/profile.jpg" alt="Pearl Kuuridong" class="avatar">
       </div>
     </div>
 
-  </div>
+    <!-- RESEARCH -->
+    <section id="research">
+      <div class="sec-label">Research</div>
+      <div class="research-card">
+        <h3>Combinatorial Optimization with Graph Neural Networks</h3>
+        <p>
+          Reproduces and extends the GCON framework (Wenkel et al., 2024) — an unsupervised GNN
+          using hybrid filter banks for NP-hard CO problems. Extends the framework to Maximum
+          Independent Set and Balanced Graph Partitioning with novel self-supervised loss functions
+          and rule-based decoders.
+        </p>
+        <div class="tags">
+          <span class="tag tag-teal">Graph Neural Networks</span>
+          <span class="tag tag-navy">Combinatorial Optimization</span>
+          <span class="tag tag-gray">Unsupervised Learning</span>
+          <span class="tag tag-gray">Topological Data Analysis</span>
+        </div>
+        <p class="research-meta">
+          MSc Thesis &middot; AIMS Rwanda &middot; June 2026 &middot;
+          Supervised by Dr. O. Abawonse &amp; Dr. D. Woukeng Feudjio
+        </p>
+      </div>
+    </section>
 
-  <!-- RELEVANT COURSEWORK -->
-  <section class="interests">
-    <h2>Relevant Coursework</h2>
-    <ul>
-      <li>Statistical Regression</li>
-      <li>Big Data Analytics with Python</li>
-      <li>Statistical Machine Learning</li>
-      <li>Partial Differential Equations</li>
-      <li>Algorithms and Data Structures</li>
-      <li>Graphs, Matroids, and Designs</li>
-      <li>Data Driven Optimization</li>
-      <li>Topological Data Analysis</li>
-      <li>Databases and Data Management</li>
-      <li>Signal Processing</li>
-      <li>Introduction to Neural Networks</li>
-      <li>Actuarial Mathematics</li>
-    </ul>
-  </section>
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="sec-label">Projects</div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <i class="ti ti-topology-star project-icon"></i>
+          <h3>GCON — MIS &amp; Graph Partitioning</h3>
+          <p>Self-supervised loss formulations and rule-based decoders extending GCON to two new CO problems.</p>
+          <span class="project-status status-done">Completed</span>
+        </div>
+        <div class="project-card">
+          <i class="ti ti-chart-scatter project-icon"></i>
+          <h3>Generalized Linear Models</h3>
+          <p>Simulation-based exploration of bias–variance tradeoffs and noise effects in statistical models.</p>
+          <a href="https://github.com/PearlPearl-Pearl/AIMS/blob/master/Review%20Phase/SML/learning_machines/SLR.ipynb"
+             target="_blank" class="card-link">
+            <i class="ti ti-brand-github"></i> Code
+          </a>
+        </div>
+        <div class="project-card">
+          <i class="ti ti-database project-icon"></i>
+          <h3>End-to-End Data Pipeline</h3>
+          <p>Data ingestion, transformation, and analysis under real-world scalability and reliability constraints.</p>
+          <a href="https://github.com/PearlPearl-Pearl/weather-insights.git"
+             target="_blank" class="card-link">
+            <i class="ti ti-brand-github"></i> Code
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <p>© 2025 · Pearl Kuuridong</p>
-    <p>
-      <a href="mailto:pksandoh@gmail.com">Email</a> ·
-      <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a> ·
-      <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a> ·
-      <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
-    </p>
-  </footer>
+    <!-- NOTES -->
+    <section id="notes">
+      <div class="sec-label">Notes &amp; Blog</div>
+      <ul class="blog-list">
+        <li>
+          <a href="https://medium.com/@pearlsandoh/getting-started-with-git-and-github-9fcfcd9803e7"
+             target="_blank">An Introduction to Git and GitHub</a>
+          <span class="blog-tag blog-tag-live">Published</span>
+        </li>
+        <li>
+          <a href="#">Graph Laplacians as message passing operators</a>
+          <span class="blog-tag blog-tag-soon">Coming soon</span>
+        </li>
+        <li>
+          <a href="#">Why unsupervised learning for combinatorial optimization?</a>
+          <span class="blog-tag blog-tag-soon">Coming soon</span>
+        </li>
+      </ul>
+    </section>
 
-</div>
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="sec-label">Education</div>
+      <div class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <h3>MSc in Mathematical Sciences — Data Science track</h3>
+          <span>AIMS Rwanda &middot; 2025 – 2026</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <h3>BSc in Mathematics &amp; Computer Science</h3>
+          <span>University of Ghana &middot; 2018 – 2022</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sec-label">Contact</div>
+      <div class="contact-band">
+        <p>
+          Interested in research collaborations, doctoral opportunities, or just want to
+          talk graphs and machine learning? I'd love to hear from you.
+        </p>
+        <a href="mailto:pksandoh@gmail.com">Get in touch</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>&copy; 2026 Pearl Kuuridong</span>
+      <div class="footer-links">
+        <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a>
+        <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
+        <a href="mailto:pksandoh@gmail.com">Email</a>
+      </div>
+    </footer>
+
+  </main>
 </body>
 </html>
