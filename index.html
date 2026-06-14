@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pearl Kuuridong — Mathematician & ML Researcher</title>
-  <meta name="description" content="Pearl Kuuridong — mathematician and machine learning researcher working on graph neural networks and combinatorial optimization.">
+  <title>Pearl Kuuridong — Mathematician & Researcher</title>
+  <meta name="description" content="Pearl Kuuridong — mathematician working on combinatorial optimization and graph-based learning.">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
@@ -29,17 +29,17 @@
     <!-- HERO -->
     <div class="hero">
       <div class="hero-left">
-        <p class="hero-eyebrow">Mathematician &amp; ML Researcher</p>
+        <p class="hero-eyebrow">Mathematician &amp; Researcher</p>
         <h1>Pearl<br>Kuuridong</h1>
         <p class="hero-bio">
-          I work at the intersection of graph theory, topological data analysis, and
-          machine learning — with a focus on how geometry and structure can help solve
-          hard combinatorial problems.
+          I work at the intersection of combinatorial optimization and graph-based
+          learning, with a focus on how discrete structure shapes what algorithms
+          can find.
         </p>
         <p class="hero-bio">
-          Currently finishing my MSc in Mathematical Sciences at AIMS Rwanda, where my
-          thesis studies unsupervised GNN frameworks for combinatorial optimization.
-          Previously a data engineer; actively pursuing doctoral study.
+          Recently defended my MSc thesis at AIMS Rwanda on combinatorial
+          optimization with graph neural networks. Previously a data engineer;
+          actively pursuing doctoral study.
         </p>
         <div class="hero-socials">
           <a href="mailto:pksandoh@gmail.com">
@@ -67,16 +67,19 @@
       <div class="research-card">
         <h3>Combinatorial Optimization with Graph Neural Networks</h3>
         <p>
-          Reproduces and extends the GCON framework (Wenkel et al., 2024) — an unsupervised GNN
-          using hybrid filter banks for NP-hard CO problems. Extends the framework to Maximum
-          Independent Set and Balanced Graph Partitioning with novel self-supervised loss functions
-          and rule-based decoders.
+          Applies the GCON self-supervised GNN framework (Wenkel et al., 2024)
+          to two new combinatorial optimization problems: Maximum Independent Set
+          and Balanced Graph Partitioning, by deriving problem-specific loss
+          functions and rule-based decoders. A key finding is the tension between
+          objective optimization and constraint satisfaction: spectral methods
+          minimize cut size effectively but often violate balance constraints,
+          while learning-based approaches better preserve feasibility.
         </p>
         <div class="tags">
           <span class="tag tag-teal">Graph Neural Networks</span>
           <span class="tag tag-navy">Combinatorial Optimization</span>
-          <span class="tag tag-gray">Unsupervised Learning</span>
-          <span class="tag tag-gray">Topological Data Analysis</span>
+          <span class="tag tag-gray">Self-Supervised Learning</span>
+          <span class="tag tag-gray">Graph Theory</span>
         </div>
         <p class="research-meta">
           MSc Thesis &middot; AIMS Rwanda &middot; June 2026 &middot;
@@ -92,13 +95,15 @@
         <div class="project-card">
           <i class="ti ti-topology-star project-icon"></i>
           <h3>GCON — MIS &amp; Graph Partitioning</h3>
-          <p>Self-supervised loss formulations and rule-based decoders extending GCON to two new CO problems.</p>
+          <p>Self-supervised loss formulations and rule-based decoders for
+          applying GCON to two new combinatorial optimization problems.</p>
           <span class="project-status status-done">Completed</span>
         </div>
         <div class="project-card">
           <i class="ti ti-chart-scatter project-icon"></i>
           <h3>Generalized Linear Models</h3>
-          <p>Simulation-based exploration of bias–variance tradeoffs and noise effects in statistical models.</p>
+          <p>Simulation-based exploration of bias-variance tradeoffs and noise
+          effects in statistical models.</p>
           <a href="https://github.com/PearlPearl-Pearl/AIMS/blob/master/Review%20Phase/SML/learning_machines/SLR.ipynb"
              target="_blank" class="card-link">
             <i class="ti ti-brand-github"></i> Code
@@ -107,7 +112,8 @@
         <div class="project-card">
           <i class="ti ti-database project-icon"></i>
           <h3>End-to-End Data Pipeline</h3>
-          <p>Data ingestion, transformation, and analysis under real-world scalability and reliability constraints.</p>
+          <p>Data ingestion, transformation, and analysis under real-world
+          scalability and reliability constraints.</p>
           <a href="https://github.com/PearlPearl-Pearl/weather-insights.git"
              target="_blank" class="card-link">
             <i class="ti ti-brand-github"></i> Code
@@ -120,6 +126,11 @@
     <section id="notes">
       <div class="sec-label">Notes &amp; Blog</div>
       <ul class="blog-list">
+        <li>
+          <a href="https://medium.com/p/5422beebeb74"
+             target="_blank">What Fourier Transforms Sound Like</a>
+          <span class="blog-tag blog-tag-live">Published</span>
+        </li>
         <li>
           <a href="https://medium.com/@pearlsandoh/getting-started-with-git-and-github-9fcfcd9803e7"
              target="_blank">An Introduction to Git and GitHub</a>
@@ -160,8 +171,9 @@
       <div class="sec-label">Contact</div>
       <div class="contact-band">
         <p>
-          Interested in research collaborations, doctoral opportunities, or just want to
-          talk graphs and machine learning? I'd love to hear from you.
+          Interested in research collaborations, doctoral opportunities, or just
+          want to talk graphs and combinatorial optimization? I would love to
+          hear from you.
         </p>
         <a href="mailto:pksandoh@gmail.com">Get in touch</a>
       </div>
