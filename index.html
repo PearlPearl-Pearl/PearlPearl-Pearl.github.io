@@ -15,9 +15,7 @@
     <a href="index.html" class="nav-brand">Pearl Kuuridong</a>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
-      <a href="projects.html">Research</a>
-      <a href="index.html#notes">Notes</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="notes.html">Notes</a>
       <a href="assets/Pearl_Kuuridong_CV.pdf" download class="cv-btn">
         <i class="ti ti-download"></i> CV
       </a>
@@ -42,8 +40,8 @@
           actively pursuing doctoral study.
         </p>
         <div class="hero-socials">
-          <a href="mailto:spkuuridong@gmail.com">
-            <i class="ti ti-mail"></i> spkuuridong@gmail.com
+          <a href="mailto:pearl.kuuridong@aims.ac.rw">
+            <i class="ti ti-mail"></i> pearl.kuuridong@aims.ac.rw
           </a>
           <a href="https://github.com/PearlPearl-Pearl" target="_blank">
             <i class="ti ti-brand-github"></i> GitHub
@@ -58,13 +56,29 @@
       </div>
       <div class="hero-right">
         <img src="assets/profile.jpg" alt="Pearl Kuuridong" class="avatar">
+        <div class="hero-education">
+          <h4>Education</h4>
+          <div class="hero-edu-item">
+            <span class="hero-edu-dot"></span>
+            <div>
+              <h5>MSc in Mathematical Sciences — Data Science</h5>
+              <span>AIMS Rwanda &middot; 2025 – 2026</span>
+            </div>
+          </div>
+          <div class="hero-edu-item">
+            <span class="hero-edu-dot"></span>
+            <div>
+              <h5>BSc in Mathematical Sciences — Mathematics &amp; Computer Science</h5>
+              <span>University of Ghana &middot; 2018 – 2022</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- RESEARCH -->
     <section id="research">
-      <!-- <div class="sec-label">Research</div> -->
-      <!-- <div class="research-card">
+      <div class="research-card">
         <h3>Combinatorial Optimization with Graph Neural Networks</h3>
         <p>
           Applies the GCON self-supervised GNN framework (Wenkel et al., 2024)
@@ -85,115 +99,78 @@
           MSc Thesis &middot; AIMS Rwanda &middot; June 2026 &middot;
           Supervised by Dr. O. Abawonse &amp; Dr. D. Woukeng Feudjio
         </p>
-      </div> -->
+        <a href="assets/Pearl_Kuuridong_Thesis.pdf" target="_blank" class="card-link">
+          <i class="ti ti-file-text"></i> Read Full Thesis (PDF)
+        </a>
+      </div>
+
       <div class="research-card">
-  <h3>Combinatorial Optimization with Graph Neural Networks</h3>
-  <p>
-        Applies the GCON self-supervised GNN framework (Wenkel et al., 2024)
-        to two new combinatorial optimization problems: Maximum Independent Set
-        and Balanced Graph Partitioning, by deriving problem-specific loss
-        functions and rule-based decoders. A key finding is the tension between
-        objective optimization and constraint satisfaction: spectral methods
-        minimize cut size effectively but often violate balance constraints,
-        while learning-based approaches better preserve feasibility.
-  </p>
-  <div class="tags">
-    <span class="tag tag-teal">Graph Neural Networks</span>
-    <span class="tag tag-navy">Combinatorial Optimization</span>
-    <span class="tag tag-gray">Self-Supervised Learning</span>
-    <span class="tag tag-gray">Graph Theory</span>
-  </div>
-  <p class="research-meta">
-        MSc Thesis &middot; AIMS Rwanda &middot; June 2026 &middot;
-        Supervised by Dr. O. Abawonse &amp; Dr. D. Woukeng Feudjio
-  </p>
-  <a href="assets/Pearl_Kuuridong_Thesis.pdf" target="_blank" class="card-link">
-    <i class="ti ti-file-text"></i> Read Full Thesis (PDF)
-  </a>
-</div>
+        <h3>Applying Persistent Homology to Topological Data Analysis (TDA)</h3>
+        <p>
+          Undergraduate thesis introducing persistent homology as a tool for extracting
+          topological features from data covering the foundations in point-set and
+          algebraic topology, the persistent homology pipeline, and a worked Python
+          example computing persistence diagrams for a point cloud using Rips complexes.
+        </p>
+        <div class="tags">
+          <span class="tag tag-teal">Topological Data Analysis</span>
+          <span class="tag tag-navy">Persistent Homology</span>
+          <span class="tag tag-gray">Algebraic Topology</span>
+        </div>
+        <p class="research-meta">
+          BSc Thesis &middot; University of Ghana &middot; December 2022 &middot;
+          Supervised by Dr. Ralph Agyei Twum
+        </p>
+        <a href="assets/Pearl_Kuuridong_BSc_Thesis.pdf" target="_blank" class="card-link">
+          <i class="ti ti-file-text"></i> Read Full Thesis (PDF)
+        </a>
+      </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="sec-label">Projects</div>
-      <div class="projects-grid">
-        <div class="project-card">
-          <i class="ti ti-topology-star project-icon"></i>
-          <h3>GCON — MIS &amp; Graph Partitioning</h3>
-          <p>Self-supervised loss formulations and rule-based decoders for
-          applying GCON to two new combinatorial optimization problems.</p>
-          <span class="project-status status-done">Completed</span>
-        </div>
-        <div class="project-card">
-          <i class="ti ti-chart-scatter project-icon"></i>
-          <h3>Generalized Linear Models</h3>
-          <p>Simulation-based exploration of bias-variance tradeoffs and noise
-          effects in statistical models.</p>
-          <a href="https://github.com/PearlPearl-Pearl/AIMS/blob/master/Review%20Phase/SML/learning_machines/SLR.ipynb"
-             target="_blank" class="card-link">
-            <i class="ti ti-brand-github"></i> Code
-          </a>
-        </div>
-        <div class="project-card">
-          <i class="ti ti-database project-icon"></i>
-          <h3>End-to-End Data Pipeline</h3>
-          <p>Data ingestion, transformation, and analysis under real-world
-          scalability and reliability constraints.</p>
-          <a href="https://github.com/PearlPearl-Pearl/weather-insights.git"
-             target="_blank" class="card-link">
-            <i class="ti ti-brand-github"></i> Code
-          </a>
-        </div>
-      </div>
+    <!-- READING LIST -->
+    <section id="reading">
+      <div class="sec-label">Reading List</div>
+      <ul class="paper-list">
+        <li class="paper-item">
+          <div class="paper-body">
+            <a href="https://arxiv.org/pdf/2405.20543" target="_blank" class="paper-title">
+              Towards a General Recipe for Combinatorial Optimization with Multi-Filter GNNs
+            </a>
+            <span class="paper-meta">F. Wenkel, S. Cant&uuml;rk, S. Horoi, M. Perlmutter, G. Wolf &middot; 2024</span>
+          </div>
+          <div class="paper-status-wrap">
+            <span class="paper-status status-finished">Finished</span>
+            <span class="paper-started">Apr 2026</span>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <!-- NOTES -->
     <section id="notes">
-      <div class="sec-label">Notes &amp; Blog</div>
-      <ul class="blog-list">
-  <li>
-    <div class="blog-list-left">
-      <a href="https://medium.com/@pearlsandoh/a-practical-approach-to-denoising-sound-5422beebeb74"
-         target="_blank">A Practical Approach to Denoising Sound</a>
-      <span class="blog-subtitle">Using Fourier transforms to separate signal from noise</span>
-    </div>
-    <span class="blog-tag blog-tag-live">Published</span>
-  </li>
-  <li>
-    <div class="blog-list-left">
-      <a href="https://medium.com/@pearlsandoh/getting-started-with-git-and-github-9fcfcd9803e7"
-         target="_blank">An Introduction to Git and GitHub</a>
-      <!-- <span class="blog-subtitle">Subtitle placeholder for Git article</span> -->
-    </div>
-    <span class="blog-tag blog-tag-live">Published</span>
-  </li>
-  <li>
-    <div class="blog-list-left">
-      <a href="#">Two Piles, One Golden Ratio</a>
-      <span class="blog-subtitle">What backward induction reveals about Wythoff's Nim</span>
-    </div>
-    <span class="blog-tag blog-tag-soon">Coming soon</span>
-  </li>
-</ul>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education">
-      <div class="sec-label">Education</div>
-      <div class="edu-item">
-        <div class="edu-dot"></div>
-        <div>
-          <h3>MSc in Mathematical Sciences — Data Science track</h3>
-          <span>AIMS Rwanda &middot; 2025 – 2026</span>
-        </div>
-      </div>
-      <div class="edu-item">
-        <div class="edu-dot"></div>
-        <div>
-          <h3>BSc in Mathematics &amp; Computer Science</h3>
-          <span>University of Ghana &middot; 2018 – 2022</span>
-        </div>
-      </div>
+      <div class="sec-label">Notes &amp; Writing</div>
+      <ul class="essay-list">
+        <li class="essay-item">
+          <span class="essay-date">Jun 16</span>
+          <div class="essay-body">
+            <a href="https://medium.com/@pearlsandoh/a-practical-approach-to-denoising-sound-5422beebeb74"
+               target="_blank" class="essay-title">A Practical Approach to Denoising Sound</a>
+            <p class="essay-subtitle">Using Fourier transforms to separate signal from noise.</p>
+          </div>
+          <span class="essay-meta">5 min</span>
+        </li>
+        <li class="essay-item">
+          <span class="essay-date">&mdash;</span>
+          <div class="essay-body">
+            <span class="essay-title essay-title-disabled">Two Piles, One Golden Ratio</span>
+            <p class="essay-subtitle">What backward induction reveals about Wythoff's Nim.</p>
+          </div>
+          <span class="essay-meta essay-meta-soon">Coming soon</span>
+        </li>
+      </ul>
+      <p style="margin-top:1rem;">
+        <a href="notes.html" class="card-link">View all notes <i class="ti ti-arrow-right"></i></a>
+      </p>
     </section>
 
     <!-- CONTACT -->
@@ -205,7 +182,7 @@
           want to talk graphs and combinatorial optimization? I would love to
           hear from you.
         </p>
-        <a href="mailto:spkuuridong@gmail.com">Get in touch</a>
+        <a href="mailto:pearl.kuuridong@aims.ac.rw">Get in touch</a>
       </div>
     </section>
 
@@ -216,7 +193,7 @@
         <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a>
         <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a>
         <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
-        <a href="mailto:spkuuridong@gmail.com">Email</a>
+        <a href="mailto:pearl.kuuridong@aims.ac.rw">Email</a>
       </div>
     </footer>
 

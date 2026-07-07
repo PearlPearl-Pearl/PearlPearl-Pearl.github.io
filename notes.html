@@ -3,39 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes & Writing</title>
+  <title>Notes & Writing — Pearl Kuuridong</title>
+  <meta name="description" content="Essays and reading notes by Pearl Kuuridong on mathematics, machine learning, and software.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
-
 <body>
-<div class="container">
 
+  <!-- NAV -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="projects.html">Research</a>
-    <a href="notes.html" class="active">Notes</a>
-    <a href="assets/CV_Pearl_Kuuridong.pdf" download class="btn">Download CV</a>
+    <a href="index.html" class="nav-brand">Pearl Kuuridong</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="notes.html" class="active">Notes</a>
+      <a href="assets/Pearl_Kuuridong_CV.pdf" download class="cv-btn">
+        <i class="ti ti-download"></i> CV
+      </a>
+    </div>
   </nav>
 
-  <header class="intro">
-    <h1>Notes & Reflections</h1>
-    <p class="lead">
-      Informal technical notes and reflections written as part of my learning process.
-    </p>
-  </header>
+  <main class="page">
 
-  <section class="notes-list">
-    <ul>
-      <li>Intuition behind kNN and distance metrics</li>
-      <li>Bias–variance tradeoff: beyond the textbook explanation</li>
-      <li>Thoughts on implementing ML algorithms from scratch</li>
-    </ul>
-  </section>
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <p class="hero-eyebrow">Writing</p>
+      <h1 style="font-family:'Lora',serif; font-size:32px; font-weight:500; color:var(--navy); line-height:1.2;">
+        Notes &amp; Writing
+      </h1>
+      <p class="lead">
+        Two threads: reflections on papers from my reading list, tied to my research
+        direction, and essays on other things I find interesting along the way.
+      </p>
+    </div>
 
-  <footer>
-    <p>© 2025 · Academic homepage</p>
-  </footer>
+    <!-- READING NOTES -->
+    <!-- Placeholder — once you send real papers for the homepage reading list, we can add a short reflection per paper here. -->
+    <section>
+      <div class="sec-label">Reading Notes</div>
+      <p class="notes-intro">
+        Summaries, reflections, and questions that come up as I work through papers
+        on my <a href="index.html#reading">reading list</a> — tied to my research direction.
+      </p>
+      <ul class="scratch-list">
+        <li>Notes on <em>Towards a General Recipe for Combinatorial Optimization with Multi-Filter GNNs</em> (Wenkel et al., 2024) &mdash; coming soon.</li>
+      </ul>
+    </section>
 
-</div>
+    <!-- ESSAYS -->
+    <section>
+      <div class="sec-label">Essays</div>
+      <p class="notes-intro">
+        Writing on things I find interesting outside my main research direction —
+        a project or a puzzle from a course I enjoyed, a concept I wanted to teach to others, that kind of thing.
+      </p>
+
+      <div class="year-group">
+        <h2 class="year-heading">2026</h2>
+        <ul class="essay-list">
+          <li class="essay-item">
+            <span class="essay-date">Jun 16</span>
+            <div class="essay-body">
+              <a href="https://medium.com/@pearlsandoh/a-practical-approach-to-denoising-sound-5422beebeb74"
+                 target="_blank" class="essay-title">A Practical Approach to Denoising Sound</a>
+              <p class="essay-subtitle">Using Fourier transforms to separate signal from noise.</p>
+            </div>
+            <span class="essay-meta">5 min</span>
+          </li>
+          <li class="essay-item">
+            <span class="essay-date">&mdash;</span>
+            <div class="essay-body">
+              <span class="essay-title essay-title-disabled">Two Piles, One Golden Ratio</span>
+              <p class="essay-subtitle">What backward induction reveals about Wythoff's Nim.</p>
+            </div>
+            <span class="essay-meta essay-meta-soon">Coming soon</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="year-group">
+        <h2 class="year-heading">2024</h2>
+        <ul class="essay-list">
+          <li class="essay-item">
+            <span class="essay-date">Sep 29</span>
+            <div class="essay-body">
+              <a href="https://medium.com/@pearlsandoh/getting-started-with-git-and-github-9fcfcd9803e7"
+                 target="_blank" class="essay-title">Getting Started With Git and GitHub</a>
+              <p class="essay-subtitle">A beginner-friendly walkthrough of repositories, staging, and commits.</p>
+            </div>
+            <span class="essay-meta">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>&copy; 2026 Pearl Kuuridong</span>
+      <div class="footer-links">
+        <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a>
+        <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
+        <a href="mailto:pearl.kuuridong@aims.ac.rw">Email</a>
+      </div>
+    </footer>
+
+  </main>
 </body>
 </html>
