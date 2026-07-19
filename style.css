@@ -250,6 +250,18 @@ section { margin-bottom: 4rem; }
   gap: 4px; flex-shrink: 0;
 }
 
+.scratch-list li a {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.scratch-list li a:hover {
+  color: var(--teal);
+}
+
 .paper-status {
   font-size: 10px; font-weight: 500; letter-spacing: 0.05em;
   text-transform: uppercase; padding: 2px 8px; border-radius: 3px;
