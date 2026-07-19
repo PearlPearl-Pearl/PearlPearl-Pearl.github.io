@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
     .note-wrap { max-width: 660px; margin: 0 auto; padding: 2rem 0 4rem; }
-    .note-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 500; color: var(--navy); line-height: 1.3; margin: 0.5rem 0 0.6rem; }
+    .note-title { font-family: 'Lora', serif; font-size: 34px; font-weight: 500; color: var(--navy); line-height: 1.3; margin: 0.5rem 0 0.6rem; }
     .note-byline { font-size: 12px; color: var(--muted); margin-bottom: 0.4rem; }
     .note-byline a { color: var(--navy); text-decoration: none; }
     .note-byline a:hover { text-decoration: underline; }
@@ -48,19 +48,47 @@
 
       <div class="prose">
         <h2>Why I read this</h2>
-        <p>Write your reason here in your own words.</p>
+        <p>As part of my master's program at the African Institute 
+          for Mathematical Sciences (AIMS), Rwanda, I completed an 
+          eight-week research thesis on learning-based approaches to 
+          combinatorial optimization. This paper was the central 
+          reference for my work. I aimed to reproduce the authors' 
+          experimental results and explore the generality of their 
+          framework by applying it to new optimization problems and 
+          formulations.</p>
 
         <h2>What the paper does</h2>
-        <p>Write your summary here. Let it flow across as many paragraphs as you need.</p>
+        <p>The authors introduce the Graph Combinatorial Optimization Network (GCON), 
+          a graph neural network architecture designed specifically for 
+          graph-based combinatorial optimization problems. The key idea 
+          behind GCON is to incorporate structural information from graphs 
+          through a multi-filter architecture inspired by Graph Signal 
+          Processing. Instead of relying on a single aggregation operation, 
+          GCON uses a bank of graph filters to capture different aspects of the 
+          graph structure and learn more expressive node representations.
+          <br><br>
+          The network is trained in a self-supervised manner, with problem-specific 
+          loss functions encoding the constraints rather than requiring labelled 
+          optimal solutions. 
+          The continuous outputs produced by the network are then converted into 
+          feasible discrete solutions through problem-specific decoding procedures. 
+          In this way, the framework provides a general approach for applying graph neural networks 
+          to different combinatorial optimization tasks.</p>
 
         <h2>Main ideas</h2>
-        <p>Write the key ideas here in prose, not a list. Let one idea lead to the next.</p>
+        <p>
+          <!-- Write the key ideas here in prose, not a list. Let one idea lead to the next.-->
+        </p> 
 
         <h2>Questions</h2>
-        <p>What do you still not understand, or want to chase further?</p>
+        <p>
+          <!-- What do you still not understand, or want to chase further? -->
+        </p>
 
         <h2>Connections to my research</h2>
-        <p>How does this connect to your thesis work, your open question, or other papers you are reading?</p>
+        <p>
+          <!-- How does this connect to your thesis work, your open question, or other papers you are reading? -->
+        </p>
       </div>
 
       <a href="../notes.html" class="note-back">
