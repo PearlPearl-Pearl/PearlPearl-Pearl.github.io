@@ -7,6 +7,16 @@
   <meta name="description" content="Reading notes on Towards a General Recipe for Combinatorial Optimization with Multi-Filter GNNs.">
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']]
+    }
+  };
+</script>
+
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     .note-wrap { max-width: 660px; margin: 0 auto; padding: 2rem 0 4rem; }
     .note-title { font-family: 'Lora', serif; font-size: 34px; font-weight: 500; color: var(--navy); line-height: 1.3; margin: 0.5rem 0 0.6rem; }
@@ -60,12 +70,17 @@
         <h2>What the paper does</h2>
         <p>The authors introduce the Graph Combinatorial Optimization Network (GCON), 
           a graph neural network architecture designed specifically for 
-          graph-based combinatorial optimization problems. The key idea 
+          graph-based combinatorial optimization problems. With a lot of 
+          graph based combinatorial optimization problems being NP-hard or 
+          NP-complete and exact solutions being out of reach, the GCON is proposed 
+          as a learned solver
+          
+          The key idea 
           behind GCON is to incorporate structural information from graphs 
           through a multi-filter architecture inspired by Graph Signal 
           Processing. Instead of relying on a single aggregation operation, 
           GCON uses a bank of graph filters to capture different aspects of the 
-          graph structure and learn more expressive node representations.
+          graph structure and learn more expressive node representations using attention mechanisms.
           <br><br>
           The network is trained in a self-supervised manner, with problem-specific 
           loss functions encoding the constraints rather than requiring labelled 
@@ -77,24 +92,72 @@
 
         <h2>Main ideas</h2>
         <p>
-  Work in progress. I am currently extracting the main conceptual ideas 
-  from the paper, particularly the relationship between combinatorial 
-  search, solver-based methods, and end-to-end verification.
-</p>
+          The paper proposes GCON (Graph Combinatorial Optimization Network), 
+          a neural network architecture built for combinatorial optimization problems on graphs. In particular the authors use only 
+          finite, connected graphs in their work.
+          It builds on the ScatteringClique architecture introduced by <a href="https://arxiv.org/abs/2206.01506">Min et al.</a>, 
+          keeping its multi-filter design which was inspired by concepts in Graph Signal Processing (GSP), 
+          but replacing how the filters are combined. 
+          Instead of a single attention vector across both filter classes, GCON uses 
+          separate attention vectors for the different filter classes. 
+          <!-- The goal is expressive node representations that generalize across a range of combinatorial optimization problems. -->
+          <br><br>
+            The filter bank consists of two filter classes: aggregation filters and comparison filters. 
+            A filter can be viewed as a function that transforms the information stored at each node based on the structure of the graph. 
+            Since the filters must aggregate and compare information across neighbouring vertices, the network first defines a propagation matrix describing how information is passed through the graph. The propagation matrix used in the paper is
+            \[P = \frac{1}{2}(I + AD^{-1}),\]
+            where \(A\) denotes the adjacency matrix, \(D\) the degree matrix, and \(I\) the identity matrix. 
+            This matrix is the transition matrix of the Markov chain defined by the graph being used in the combinatorial 
+            optimization problem.
+          <br><br>
+            This Markov chain has desirable 
+            convergence properties, which provide the theoretical motivation for using 
+            separate attention mechanisms for aggregation and comparison filters. 
+            In particular, it is both irreducible, meaning that a path exists from every 
+            vertex to every other vertex, as well as aperiodic, meaning that the chain 
+            does not get trapped in cycles of a fixed length. Therefore, the Markov chain, being finite, 
+            is ergodic and the repeated application of the transition matrix converges to 
+            a unique stationary distribution, which is the normalized degree vector \(\displaystyle\frac{d}{\|d\|_1}\).
 
-<h2>Questions</h2>
-<p>
-  Work in progress. This section will record questions that emerge 
-  during the reading process, including technical details that require 
-  further investigation and connections to related areas.
-</p>
+          <br><br>
+          <!-- GCON's filter bank has two kinds of filters: aggregation filters and comparison filters.  -->
+          The aggregation filters in GCON's filter bank let the network collect and combine similar information from neighboring vertices, 
+          capturing local patterns in the graph's structure. The aggregation filters are defined as \[f_{A}^{k}(X):= P^kX,\] where \(X\) is the matrix containing the features at each node.
+          <br>But for many combinatorial optimization problems, 
+          that's not enough on its own. Take Maximum Independent Set (MIS): a valid solution needs vertices that aren't adjacent to each 
+          other. Knowing which neighboring vertices look similar doesn't tell you which ones to avoid selecting together.
 
-<h2>Connections to my research</h2>
-<p>
-  Work in progress. I am exploring how the ideas in this paper connect 
-  to my interests in combinatorial optimization, algorithmic methods, 
-  and learning-based approaches for solving graph problems.
-</p>
+          This is where comparison filters come in. They extract information about how adjacent vertices differ, not just how they're alike. 
+          They are defined as \[f_{C}^{k_1,k_2}(X):= (P^{k_1}-P^{k_2})X\]
+          That gives the network a second, complementary signal, one that captures contrast rather than similarity, which turns out to matter 
+          for solving these problems well.
+          <br><br>
+          Two attention vectors exist in each layer of the GCON, one for each filter class and both of them are learned vectors. 
+          <!-- Fixing the aggregation filter bank, without loss of generality, the feature matrix is passed through the filters and the result, 
+          which is concatenated with the original feature matrix, is multiplied with the attention vector to give the attention score. 
+          For each vertex, we then get a single normalized attention score across all filters in the filter bank in question, thus giving two different filter banks -->
+          These attention vectors are used to compute normalized attention scores, which is essentially a weight given to each of the filter responses, 
+          in some filter bank, at some node in the graph. Still keeping the responses across the different filter banks separate, the filter responses at some node are 
+          then weighted according to the normalized attention score for that filter at that node and then summed up to get the filter response in some class, at that node.
+          The fact that the attention vectors are learned means that we are essentially learning the importance of each filter at each node thereby extracting 
+          the most useful information at each node.
+          <br><br>
+          This choice of separating the attention classes is shown to have a theoretical backing. In particular the authors show that if we use just a single attention vector across both filter classes, even when the network learns that a comparison filter is more important, we find that for sufficiently large scales of the filters, the aggregation filters dominate over the comparison filters in
+        </p>
+
+        <h2>Questions</h2>
+        <p>
+          Work in progress. This section will record questions that emerge 
+          during the reading process, including technical details that require 
+          further investigation and connections to related areas.
+        </p>
+
+        <h2>Connections to my research</h2>
+        <p>
+          Work in progress. I am exploring how the ideas in this paper connect 
+          to my interests in combinatorial optimization, algorithmic methods, 
+          and learning-based approaches for solving graph problems.
+        </p>
       </div>
 
       <a href="../notes.html" class="note-back">
