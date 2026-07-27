@@ -92,57 +92,52 @@
 
         <h2>Main ideas</h2>
         <p>
-          The paper proposes GCON (Graph Combinatorial Optimization Network), 
-          a neural network architecture built for combinatorial optimization problems on graphs. In particular the authors use only 
-          finite, connected graphs in their work.
-          It builds on the ScatteringClique architecture introduced by <a href="https://arxiv.org/abs/2206.01506" class="note-byline">Min et al.</a>, 
+          <strong>The architecture.</strong> The paper proposes GCON (Graph Combinatorial Optimization Network), 
+          a neural network architecture built for combinatorial optimization problems on graphs. 
+          In particular the authors consider only finite, connected graphs in their work.
+          They build on the ScatteringClique architecture introduced by <a href="https://arxiv.org/abs/2206.01506" class="note-byline">Min et al.</a>, 
           keeping its multi-filter design which was inspired by concepts in Graph Signal Processing (GSP), 
-          but replacing how the filters are combined. 
-          Instead of a single attention vector across both filter classes, GCON uses 
-          separate attention vectors for the different filter classes. 
-          <!-- The goal is expressive node representations that generalize across a range of combinatorial optimization problems. -->
+          but replacing how the filters are combined. Instead of a single attention vector that is shared 
+          across both filter classes, GCON uses separate attention vectors for the different filter classes.
           <br><br>
-            The filter bank consists of two filter classes: aggregation filters and comparison filters. 
-            A filter can be viewed as a function that transforms the information stored at each node based on the structure of the graph. 
-            Since the filters must aggregate and compare information across neighbouring vertices, the network first defines a propagation matrix describing how information is passed through the graph. The propagation matrix used in the paper is
-            \[P = \frac{1}{2}(I + AD^{-1}),\]
-            where \(A\) denotes the adjacency matrix, \(D\) the degree matrix, and \(I\) the identity matrix. 
-            This matrix is the transition matrix of the Markov chain defined by the graph being used in the combinatorial 
-            optimization problem.
-          <br><br>
-            This Markov chain has desirable 
-            convergence properties, which provide the theoretical motivation for using 
-            separate attention mechanisms for aggregation and comparison filters. 
-            In particular, it is both irreducible, meaning that a path exists from every 
-            vertex to every other vertex, as well as aperiodic, meaning that the chain 
-            does not get trapped in cycles of a fixed length. Therefore, the Markov chain, being finite, 
-            is ergodic and the repeated application of the transition matrix converges to 
-            a unique stationary distribution, which is the normalized degree vector \(\displaystyle\frac{d}{\|d\|_1}\).
 
+          <strong>The propagation matrix.</strong> The filter bank consists of two filter classes: 
+          aggregation filters and comparison filters. A filter is a function 
+          \(f: \mathbb{R}^{n \times d} \to \mathbb{R}^{n \times d}\) that transforms the node feature matrix \(X\). 
+          Both filter classes are built around the same underlying object: a lazy random walk on the graph. 
+          Rather than inventing an arbitrary message-passing operator, the network propagates information 
+          using powers of the random walk's transition matrix,
+          \[P = \frac{1}{2}(I + AD^{-1}),\]
+          where \(A\) denotes the adjacency matrix, \(D\) the degree matrix, and \(I\) the identity matrix. 
+          Both the aggregation and comparison filters are then defined directly in terms of powers of \(P\).
           <br><br>
-          <!-- GCON's filter bank has two kinds of filters: aggregation filters and comparison filters.  -->
-          The aggregation filters in GCON's filter bank let the network collect and combine similar information from neighboring vertices, 
-          capturing local patterns in the graph's structure. The aggregation filters are defined as \[f_{A}^{k}(X):= P^kX,\] where \(X\) is the matrix containing the features at each node.
-          <br>But for many combinatorial optimization problems, 
-          that's not enough on its own. Take Maximum Independent Set (MIS): a valid solution needs vertices that aren't adjacent to each 
-          other. Knowing which neighboring vertices look similar doesn't tell you which ones to avoid selecting together.
 
-          This is where comparison filters come in. They extract information about how adjacent vertices differ, not just how they're alike. 
-          They are defined as \[f_{C}^{k_1,k_2}(X):= (P^{k_1}-P^{k_2})X\]
-          That gives the network a second, complementary signal, one that captures contrast rather than similarity, which turns out to matter 
-          for solving these problems well.
+          <strong>Convergence of the walk.</strong> The transition matrix \(P\) defines a Markov chain on 
+          the graph, and this chain has two properties worth noting. It is irreducible, meaning a path 
+          exists from every vertex to every other vertex, and aperiodic, meaning the chain does not get 
+          trapped returning to a vertex only at fixed-length intervals. Since the graph is finite, these 
+          two properties together make the chain ergodic, so repeated applications of \(P\) converge to a 
+          unique stationary distribution, the normalized degree vector \(\displaystyle\frac{\delta}{\|\delta\|_1}\).
           <br><br>
-          Two attention vectors exist in each layer of the GCON, one for each filter class and both of them are learned vectors. 
-          <!-- Fixing the aggregation filter bank, without loss of generality, the feature matrix is passed through the filters and the result, 
-          which is concatenated with the original feature matrix, is multiplied with the attention vector to give the attention score. 
-          For each vertex, we then get a single normalized attention score across all filters in the filter bank in question, thus giving two different filter banks -->
-          These attention vectors are used to compute normalized attention scores, which is essentially a weight given to each of the filter responses, 
-          in some filter bank, at some node in the graph. Still keeping the responses across the different filter banks separate, the filter responses at some node are 
-          then weighted according to the normalized attention score for that filter at that node and then summed up to get the filter response in some class, at that node.
-          The fact that the attention vectors are learned means that we are essentially learning the importance of each filter at each node thereby extracting 
-          the most useful information at each node.
+
+          <strong>The domination problem.</strong> As a consequence, repeated applications of the aggregation 
+          operator progressively remove information about a node's original neighborhood, pulling every 
+          node's representation toward the same fixed point. Concretely, as \(k\) grows, the aggregation 
+          filter responses \(F_k(\mathbf{X}) := \mathbf{P}^k\mathbf{X}\) converge to a nonzero constant 
+          proportional to the stationary distribution, while the comparison filter responses 
+          \(F_{k_1,k_2}(\mathbf{X}) := (\mathbf{P}^{k_1}-\mathbf{P}^{k_2})\mathbf{X}\) converge to zero. 
+          This is the precise asymmetry the paper proves, and the authors call the resulting failure mode 
+          a <em>band-dominant representation</em>: one filter class settles on a nonzero signal while the 
+          other vanishes. If both filter classes were combined under a single shared attention mechanism, 
+          as in Min et al.'s ScatteringClique, this asymmetry means aggregation filters would dominate the 
+          combined representation regardless of how much attention weight the network learns to assign to 
+          comparison filters, since a large weight on a vanishing quantity still vanishes.
           <br><br>
-          This choice of separating the attention classes is shown to have a theoretical backing. In particular the authors show that if we use just a single attention vector across both filter classes, even when the network learns that a comparison filter is more important, we find that for sufficiently large scales of the filters, the aggregation filters dominate over the comparison filters in
+
+          <strong>The fix: decoupled attention.</strong> GCON avoids this by using separate attention 
+          vectors for each filter class, so the comparison filters are normalized only against each other, 
+          keeping their relative importance intact rather than being diluted by the far larger aggregation 
+          responses.
         </p>
 
         <h2>Questions</h2>
