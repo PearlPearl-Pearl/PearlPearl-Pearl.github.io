@@ -92,7 +92,7 @@
 
         <h2>Main ideas</h2>
         <p>
-          <strong>The architecture.</strong> The paper proposes GCON (Graph Combinatorial Optimization Network), 
+          <strong>The architecture:</strong><br> The paper proposes GCON (Graph Combinatorial Optimization Network), 
           a neural network architecture built for combinatorial optimization problems on graphs. 
           In particular the authors consider only finite, connected graphs in their work.
           They build on the ScatteringClique architecture introduced by <a href="https://arxiv.org/abs/2206.01506" class="note-byline">Min et al.</a>, 
@@ -101,40 +101,39 @@
           across both filter classes, GCON uses separate attention vectors for the different filter classes.
           <br><br>
 
-          <strong>The propagation matrix.</strong> The filter bank consists of two filter classes: 
+          <strong>The propagation matrix:</strong><br> The filter bank consists of two filter classes: 
           aggregation filters and comparison filters. A filter is a function 
-          \(f: \mathbb{R}^{n \times d} \to \mathbb{R}^{n \times d}\) that transforms the node feature matrix \(X\). 
+          \(f: \mathbb{R}^{n \times d} \to \mathbb{R}^{n \times d}\), where \(n\) is the cardinality of the vertex set \(V\) of the underlying graph. that transforms the node feature matrix \(X\). 
           Both filter classes are built around the same underlying object: a lazy random walk on the graph. 
           Rather than inventing an arbitrary message-passing operator, the network propagates information 
           using powers of the random walk's transition matrix,
-          \[P = \frac{1}{2}(I + AD^{-1}),\]
+          \[\mathbf{P} = \frac{1}{2}(\mathbf{I} + \mathbf{AD}^{-1}),\]
           where \(A\) denotes the adjacency matrix, \(D\) the degree matrix, and \(I\) the identity matrix. 
-          Both the aggregation and comparison filters are then defined directly in terms of powers of \(P\).
+          Both the aggregation and comparison filters are then defined directly in terms of powers of \(\mathbf{P}\).
           <br><br>
 
-          <strong>Convergence of the walk.</strong> The transition matrix \(P\) defines a Markov chain on 
+          <strong>Convergence of the walk:</strong><br> The transition matrix \(\mathbf{P}\) defines a Markov chain on 
           the graph, and this chain has two properties worth noting. It is irreducible, meaning a path 
           exists from every vertex to every other vertex, and aperiodic, meaning the chain does not get 
           trapped returning to a vertex only at fixed-length intervals. Since the graph is finite, these 
-          two properties together make the chain ergodic, so repeated applications of \(P\) converge to a 
+          two properties together make the chain ergodic, so repeated applications of \(\mathbf{P}\) converge to a 
           unique stationary distribution, the normalized degree vector \(\displaystyle\frac{\delta}{\|\delta\|_1}\).
           <br><br>
 
-          <strong>The domination problem.</strong> As a consequence, repeated applications of the aggregation 
+          <strong>The domination problem:</strong><br> As a consequence, repeated applications of the aggregation 
           operator progressively remove information about a node's original neighborhood, pulling every 
-          node's representation toward the same fixed point. Concretely, as \(k\) grows, the aggregation 
-          filter responses \(F_k(\mathbf{X}) := \mathbf{P}^k\mathbf{X}\) converge to a nonzero constant 
+          node's representation toward the same fixed point. Concretely, as \(k\) grows, and denoting the graph feature matrix as 
+          \(\mathbf{X}\), the aggregation filter responses \[F_k(\mathbf{X}) := \mathbf{P}^k\mathbf{X}\] converge to a nonzero constant 
           proportional to the stationary distribution, while the comparison filter responses 
-          \(F_{k_1,k_2}(\mathbf{X}) := (\mathbf{P}^{k_1}-\mathbf{P}^{k_2})\mathbf{X}\) converge to zero. 
-          This is the precise asymmetry the paper proves, and the authors call the resulting failure mode 
-          a <em>band-dominant representation</em>: one filter class settles on a nonzero signal while the 
+          \[F_{k_1,k_2}(\mathbf{X}) := (\mathbf{P}^{k_1}-\mathbf{P}^{k_2})\mathbf{X}\] converge to zero. 
+          This is the precise asymmetry the paper proves: one filter class settles on a nonzero signal while the 
           other vanishes. If both filter classes were combined under a single shared attention mechanism, 
           as in Min et al.'s ScatteringClique, this asymmetry means aggregation filters would dominate the 
           combined representation regardless of how much attention weight the network learns to assign to 
-          comparison filters, since a large weight on a vanishing quantity still vanishes.
+          comparison filters.
           <br><br>
 
-          <strong>The fix: decoupled attention.</strong> GCON avoids this by using separate attention 
+          <strong>Decoupled attention:</strong><br> GCON avoids this by using separate attention 
           vectors for each filter class, so the comparison filters are normalized only against each other, 
           keeping their relative importance intact rather than being diluted by the far larger aggregation 
           responses.
@@ -142,33 +141,74 @@
 
         <h2>Questions</h2>
         <p>
-          Work in progress. This section will record questions that emerge 
-          during the reading process, including technical details that require 
-          further investigation and connections to related areas.
+          <strong>Connectivity assumption:</strong><br>
+          GCON's convergence argument rests on \(\mathbf{P}\) defining an ergodic Markov chain, which in turn rests on the graph being finite and connected. 
+          One of the questions I had while working through this paper was what would happen once that assumption is dropped? 
+          An isolated vertex has degree 0, so \(\mathbf{D}\) has a zero entry on its diagonal and is not 
+          invertible there, meaning \(\mathbf{P}\) itself is not well defined for that vertex under the given formula. More generally, if the graph splits into two or more 
+          connected components, the resulting chain is not irreducible as there is no path between vertices in different components. 
+          Without irreducibility there is no single stationary distribution for the graph as a whole, only one stationary distribution per component, each supported 
+          entirely on that component's own vertices. Practically, this suggests GCON as stated would need to treat each connected component separately 
+          (running the walk and computing filter responses component by component) or handle isolated vertices as a degenerate case on their own. I don't think this 
+          changes anything about the core ideas, but it does mean the connectedness assumption isn't just a technical convenience; it is doing real work in the 
+          ergodicity argument, and any claim of general applicability should say what happens when it does not hold.
+          
+          <br><br>
+          <strong>Loss-dependent ranking reversal:</strong><br>
+          While running experiments on Maximum Independent Set, swapping the linear loss formulation, \[L_{\text{linear}}(\mathbf{p}):= -\sum\limits_{i\in V}p_i + \sum\limits_{(i,j)\in E}p_i\cdot p_j\] for a QUBO-style (quadratic) one, \[L_{\text{quadratic}}(\mathbf{p}):= -\sum\limits_{i\in V}p_i^2 + \sum\limits_{(i,j)\in E}p_i\cdot p_j,\] where \(\mathbf{p}\in[0,1]^n,n=|V|\), didn't just change the numbers, 
+          it reversed which of the two architectures came out ahead. I do not yet have a mechanism for why. In correspondence with the GCON authors, 
+          they mentioned that the linear loss also performed poorly for them on MIS and that understanding the loss landscape further was something they wanted to 
+          pursue as future work, so this does not seem to be an artifact specific to my setup. The open question, as I see it, is whether the reversal comes from the 
+          loss reshaping the optimization landscape differently depending on the architecture's inductive bias (for example, how each architecture's attention mechanism 
+          interacts with a smoother versus more rugged loss surface), or whether it is really about how the continuous relaxation each loss produces interacts with the 
+          rule-based decoding step. Right now I am unable to distinguish between these, and I think that is the more interesting research question sitting underneath the 
+          empirical result.
+
+          <br><br>
+          <strong>Learning P instead of fixing it:</strong><br>
+          One of my supervisors raised the idea of learning P rather than fixing it as the lazy random-walk transition matrix. 
+          The convergence result in the paper depends on P being exactly this fixed, symmetric, ergodic operator; that is what lets the aggregation and comparison 
+          filter responses be characterized in closed form as k grows. If P were instead parameterized and learned, I would expect to lose that guarantee: there is no 
+          reason a learned P would still define an ergodic chain, so the clean convergence to a stationary distribution (and the resulting domination problem the 
+          paper solves with decoupled attention) might not hold in the same way. That could be a feature rather than a bug, since it might let the network avoid 
+          oversmoothing by design rather than through the decoupled-attention workaround, but it would trade away the theoretical tractability that makes the 
+          current analysis possible. This seems related to work on learnable propagation in GNNs more broadly (e.g. personalized PageRank-based propagation), 
+          and might be worth looking at in that context.
+          <br><br>
+          This raises the more basic question underneath it: what happens if the transition matrix, learned or otherwise, simply is not ergodic to begin with? 
+          Connectivity gives irreducibility, but that's only half of what ergodicity needs; aperiodicity can fail on its own, even on a connected graph. 
+          A bipartite graph is the clean example, since its transition matrix oscillates between the two sides rather than settling down, so \(\mathbf{P}^k\) never converges to a single limit no matter how large k gets. 
+          Without that convergence, the entire domination argument loses its footing, since it depends on \(\mathbf{P}^k\mathbf{X}\) converging to a nonzero multiple of the stationary distribution in the first place. 
+          The lazy-walk formulation \(\mathbf{P} = \frac{1}{2}(\mathbf{I} + \mathbf{AD}^{-1})\) sidesteps this by construction, since the self-loop weight breaks periodicity outright regardless of the graph's structure. 
+          So the fixed operator in the paper is not just a convenient choice, it is quietly doing the work of guaranteeing aperiodicity. 
+          Which means if \(\mathbf{P}\) is learned instead, aperiodicity has no reason to hold automatically, and would need to be enforced explicitly, whether through regularization, architectural constraints, 
+          or some other mechanism, or the convergence guarantee simply does not transfer.
         </p>
 
-        <h2>Connections to my research</h2>
+        <!-- <h2>Connections to my research</h2>
         <p>
           Work in progress. I am exploring how the ideas in this paper connect 
           to my interests in combinatorial optimization, algorithmic methods, 
           and learning-based approaches for solving graph problems.
-        </p>
+        </p> -->
       </div>
 
       <a href="../notes.html" class="note-back">
         <i class="ti ti-arrow-left"></i> Back to Notes
       </a>
     </div>
-  </main>
 
-  <footer>
-    <span>&copy; 2026 Pearl Kuuridong</span>
-    <div class="footer-links">
-      <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a>
-      <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
-      <a href="mailto:pearl.kuuridong@aims.ac.rw">Email</a>
-    </div>
-  </footer>
+      <footer>
+        <span>&copy; 2026 Pearl Kuuridong</span>
+        <div class="footer-links">
+          <a href="https://github.com/PearlPearl-Pearl" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/pearl-kuuridong-b247421b0/" target="_blank">LinkedIn</a>
+          <a href="https://medium.com/@pearlsandoh" target="_blank">Medium</a>
+          <a href="mailto:pearl.kuuridong@aims.ac.rw">Email</a>
+        </div>
+      </footer>
+
+
+  </main>
 </body>
 </html>
