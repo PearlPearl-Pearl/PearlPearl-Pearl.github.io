@@ -64,64 +64,179 @@
 
         <h2>The System</h2>
         <p>
-          The autograder is a system for automatically assessing Python
-          programming tutorial submissions delivered as Jupyter notebooks.
-          It's being built in parallel with the tutorials it supports,
-          rather than designed upfront and deployed once &mdash; so its
-          shape is being pulled directly from real submissions and the
-          edge cases that come with them.
+          The autograder is a Python-based system for automatically assessing
+          programming assignments submitted as Jupyter notebooks. It was built
+          specifically for the AIMS Rwanda preparatory programming tutorials,
+          where students submit notebook-based assignments through Google
+          Classroom.
         </p>
-        <!--
-          TODO (Pearl): describe the actual architecture once it's settled,
-          e.g. how notebooks are parsed, how code is executed/sandboxed,
-          how test cases or rubrics are structured and matched against
-          submissions, and what the output/feedback format looks like.
-        -->
+
         <p>
-          <em>Architecture details will be filled in here once the design
-          has settled enough to describe accurately.</em>
+          The system separates submission handling from assessment. Student
+          notebooks are first identified and validated using the assignment's
+          naming convention. A submitted notebook is then converted into a
+          Python module, which is executed against a collection of
+          assignment-specific tests. Each test is associated with a predefined
+          mark in a JSON rubric, allowing the system to calculate an objective
+          score automatically.
+        </p>
+
+        <p>
+          This design makes the tests independent of individual submissions:
+          the same assessment logic is applied consistently to every student's
+          notebook, while the marking scheme remains configurable for each
+          assignment.
         </p>
 
         <h2>What It Does</h2>
-        <!--
-          TODO (Pearl): replace with a concrete, honest list of what's
-          actually implemented and working today, not the eventual goal
-          state. Keep claims scoped to what has actually been built and
-          tested so far.
-        -->
-        <p>
-          <em>This section will list the concrete capabilities that are
-          actually implemented and tested, once there's enough of the
-          system built to describe honestly.</em>
-        </p>
+
+          <p>
+            The autograder handles the objective portion of the assessment
+            automatically, while the final review remains instructor-led. This
+            hybrid approach is intended to reduce the repetitive work of marking
+            without treating automated tests as a substitute for human judgement.
+          </p>
+
+          <ul>
+            <li>
+              Validates and identifies student submissions using a defined
+              filename convention.
+            </li>
+            <li>
+              Accepts Jupyter notebooks directly and converts them internally into
+              executable Python modules.
+            </li>
+            <li>
+              Runs assignment-specific <code>pytest</code> test suites against
+              each submission.
+            </li>
+            <li>
+              Associates individual test outcomes with predefined marks and
+              calculates the automated component of the student's score.
+            </li>
+            <li>
+              Produces test-level results that can be reviewed when a submission
+              passes or fails particular parts of an assignment.
+            </li>
+            <li>
+              Leaves qualitative and integrity-related assessment to the
+              instructor, including review of code quality, plagiarism or
+              suspicious similarity, and potential use of prohibited AI tools.
+            </li>
+          </ul>
+
+          <p>
+            After automated marking, submissions are manually reviewed before
+            grades are finalized. This provides a second layer of assessment for
+            aspects of programming work that are difficult to capture reliably
+            through predefined tests alone.
+          </p>
+
+        <h2>Architecture</h2>
+          <p>
+            The system is organized around a small set of independent components,
+            each responsible for a different stage of the marking workflow.
+          </p>
+
+          <ul>
+            <li>
+              <strong>Submission Manager:</strong> identifies valid notebook
+              submissions, extracts the student's identifier from the filename,
+              and associates each submission with its assignment.
+            </li>
+            <li>
+              <strong>Notebook Conversion:</strong> submitted Jupyter notebooks
+              are parsed with <code>nbformat</code> and converted into Python
+              source using <code>nbconvert</code>.
+            </li>
+            <li>
+              <strong>Test Engine:</strong> runs the assignment-specific
+              <code>pytest</code> test suite against the converted submission.
+            </li>
+            <li>
+              <strong>Marking Configuration:</strong> each test is mapped to a
+              predefined number of marks through an assignment-specific
+              <code>marks.json</code> file.
+            </li>
+            <li>
+              <strong>Result Collection:</strong> pytest output is parsed to
+              determine which tests passed, associate them with their allocated
+              marks, and calculate the student's objective score.
+            </li>
+          </ul>
+
+          <p>
+            Assignments are therefore kept separate from the core grading engine:
+            adding a new assignment primarily involves defining its tests and
+            marking scheme rather than rewriting the autograder itself.
+          </p>
 
         <h2>Design Decisions</h2>
-        <p>
-          Because the tutorials are ongoing, the system is being shaped
-          against real submissions rather than synthetic test cases &mdash;
-          decisions get revisited as actual student notebooks surface cases
-          that weren't anticipated.
-        </p>
-        <!--
-          TODO (Pearl): add specific design decisions and the reasoning
-          behind them as they're made, e.g. choices around grading
-          granularity, handling partial credit, dealing with notebooks
-          that don't run cleanly, etc.
-        -->
+
+          <p>
+            A central design decision was to work directly with Jupyter notebooks.
+            The tutorials are notebook-based, so requiring students to submit
+            Python scripts purely for the convenience of the grading system would
+            have added an unnecessary step to their workflow. Instead, notebooks
+            are converted internally before testing.
+          </p>
+
+          <p>
+            The assessment logic is separated from the submission itself. Tests
+            live in assignment-specific directories, while the marks allocated to
+            those tests are stored separately in JSON. This means that the
+            weighting of an assignment can be changed without modifying the
+            underlying test logic.
+          </p>
+
+          <p>
+            The system also uses multiple tests for individual questions rather
+            than relying on a single test per question. This makes it possible to
+            check normal cases as well as selected edge cases, while allowing
+            partial objective credit within a question.
+          </p>
+
+          <p>
+            Execution takes place in a temporary runtime directory. The student's
+            converted submission is created there and the test suite is executed
+            as a separate Python process. This keeps the runtime artifacts for one
+            marking operation separate from the original submission and from other
+            marking runs.
+          </p>
+
+          <p>
+            Finally, the system is deliberately assignment-driven rather than
+            hard-coded around a single assignment. The same test engine can load
+            different test suites and marking configurations using an assignment
+            code, allowing new assignments to be added without changing the core
+            grading workflow.
+          </p>
+
+          <p>
+            Because the system is being developed alongside the tutorials, real
+            student submissions have become an important source of edge cases.
+            Failures in the marking pipeline are therefore treated as feedback
+            about both the student's submission and the assumptions built into
+            the grading system.
+          </p>
 
         <h2>Current Status</h2>
-        <p>
-          In development, alongside the AIMS Rwanda Python programming
-          tutorials it's built for. Not yet released or open-sourced; being
-          tested against real tutorial submissions as they come in.
-        </p>
 
-        <h2>Lessons &amp; Future Work</h2>
-        <p>
-          <em>To be written once there's enough experience running the
-          system in practice to draw real lessons from, rather than
-          guessing at them in advance.</em>
-        </p>
+          <p>
+            The core automated marking pipeline is operational and is being used
+            during the 2026 AIMS Rwanda preparatory programming tutorials. The
+            system can identify submissions, convert notebooks, execute
+            assignment-specific pytest suites, associate test outcomes with
+            predefined marks, and calculate objective scores.
+          </p>
+
+          <p>
+            Development is ongoing. The current implementation focuses on the
+            reliable automation of objectively testable programming questions,
+            while more advanced components such as richer feedback generation,
+            plagiarism analysis, and broader grading analytics remain future
+            work.
+          </p>
       </div>
 
       <a href="../built.html" class="note-back">
